@@ -1,0 +1,23 @@
+# .gitignore
+
+# Python Backend Exclusions (in your 'server' folder)
+server/virtualenv1/      # Your virtual environment folder
+server/.venv/            # Common alternative name for virtual envs
+server/venv/             # Another common alternative name
+server/*.pyc             # Python compiled bytecode files
+server/__pycache__/      # Python cache directories
+server/.env              # Environment variables (CRITICAL for secrets)
+server/.flaskenv         # Flask specific environment file
+server/*.sqlite3         # SQLite database files (if used, like your db.sqlite)
+server/*.db              # Generic database files
+
+# Node.js Frontend Exclusions (in your 'client' folder)
+client/node_modules/     # All installed npm packages
+client/dist/             # Vite build output directory
+client/build/            # Create React App build output directory
+client/.parcel-cache/    # Parcel bundler cache (if used)
+client/npm-debug.log* # npm debug logs
+
+# Operating System Files
+.DS_Store                # macOS specific files
+Thumbs.db                # Windows specific files
