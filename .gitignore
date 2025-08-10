@@ -13,7 +13,7 @@ client/node_modules/
 client/dist/ # For Vite build output
 client/build/ # For Create React App build output
 client/npm-debug.log*
-
+client/my-project/.env
 # Operating System Files
 .DS_Store
 Thumbs.db

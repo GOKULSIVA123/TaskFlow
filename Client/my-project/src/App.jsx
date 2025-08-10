@@ -11,7 +11,7 @@ function App() {
   const [error,setError]=useState(null);
   const [comp,setComp]=useState(false);
   const congratsRef = useRef(null);
-  const API_KEY_URL='http://127.0.0.1:5000/todos'
+  const API_KEY_URL = import.meta.env.VITE_API_URL;
   const fetchdata = async () => {
   setLoading(true);
   setError(null);
