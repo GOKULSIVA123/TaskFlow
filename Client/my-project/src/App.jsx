@@ -103,16 +103,16 @@ return (
           <label className='text-xl text-blue-400 font-[400]'>Add New Todo</label>
           <input type='text' value={input} placeholder='Enter Ur Todo' onChange={(e)=>setInput(e.target.value)} className='p-3 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-full'></input> {/* <--- ADDED w-full */}
           <label className='text-xl text-blue-400 font-[400]'>Description</label>
-          <textarea placeholder='Enter The Description' value={desc} onChange={(e)=>setDesc(e.target.value)} className='max-w-[100px] p-6 border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-y w-full' rows="3"></textarea> {/* <--- ADDED w-full */}
+          <textarea placeholder='Enter The Description' value={desc} onChange={(e)=>setDesc(e.target.value)} className='max-w-[200px] p-6 border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400' rows="3"></textarea> {/* <--- ADDED w-full */}
           <button type="submit" className='mt-3 bg-blue-400 px-6 py-2 rounded-lg text-white'>Add</button>
         </form>
-        <div className='bg-blue-400 max-w-[300px] w-full min-h-[300px] p-6 rounded-lg'> {/* <--- Kept w-full for the list container */}
+        <div className='bg-blue-400 max-w-[300px] w-full min-h-[300px] p-6 rounded-lg'>
           <h1 className='text-2xl font-[400] text-white'>Todo Lists</h1>
           <ul className='flex flex-col gap-1'>{
             todos.map((todo,index)=>{
-              return <div key={index} className='flex flex-col gap-1'>
-                <li className={`${todo.completed?'line-through':''} text-white text-left`}>Title:{todo.title}</li> {/* <--- ADDED text-white text-left */}
-                <li className={`${todo.completed?'line-through':''} text-white text-left`}>Desc:{todo.description}</li> {/* <--- ADDED text-white text-left */}
+              return <div key={index} className='flex flex-col gap-1 justify-center items-center text-center'>
+                <li className={`${todo.completed?'line-through':''} text-black`}>Title:{todo.title}</li>
+                <li className={`${todo.completed?'line-through':''} text-black`}>Desc:{todo.description}</li>
                 <div className='flex flex-row gap-3 items-center justify-center mb-1 mt-1'>
                   {!todo.completed?<button onClick={()=>togglecomplete(todo.id,todo.completed)} className={`px-2 py-1 bg-black rounded-lg text-white`}>{!todo.completed?"Completed":"Congrats!"}</button>:<p ref={congratsRef} className='text-green-400 font-[600] text-[20px]'>Congrats!</p>}
                   <button className="bg-white px-2 py-1 rounded-lg" onClick={()=>delete1(todo.id)}><FaTrash></FaTrash></button>
