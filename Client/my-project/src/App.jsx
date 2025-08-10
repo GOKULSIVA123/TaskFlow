@@ -108,7 +108,7 @@ return (
           <label className='text-xl text-blue-400 font-[400]'>Description</label>
           <textarea placeholder='Enter The Description' value={desc} onChange={(e)=>setDesc(e.target.value)} className='max-w-[200px] p-6 border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400' rows="3"></textarea> {/* <--- ADDED w-full */}
           <label className='text-xl text-blue-400 font-[400]'>Time</label>
-          <input type="text" placeholder='Enter Time' value={time} onChange={(e)=>setTime(e.target.value)} className="p-3 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"></input>
+          <input type="time" placeholder='Enter Time' value={time} onChange={(e)=>setTime(e.target.value)} className="p-3 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"></input>
           <button type="submit" className='mt-3 bg-blue-400 px-6 py-2 rounded-lg text-white'>Add</button>
         </form>
         <div className='bg-blue-400 max-w-[300px] w-full min-h-[300px] p-6 rounded-lg'>

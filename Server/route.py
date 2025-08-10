@@ -11,7 +11,7 @@ def register_routes(app, db):
         data=request.get_json()
         if not data or 'title' not in data:
             return jsonify({"error":"Data without title"}),404
-        new_todo=Todos(title=data['title'],description=data.get('description'))
+        new_todo=Todos(title=data['title'],description=data.get('description'),time=data.get('time'))
         db.session.add(new_todo)
         db.session.commit()
         if N8N_WEBHOOK_URL:
