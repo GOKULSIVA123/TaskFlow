@@ -10,7 +10,7 @@ class Todos(db.Model):
     description = db.Column(db.Text)
     completed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-    Hello="Hello"
+    time=db.Column(db.String(255),nullable=True)
     def to_dict(self):
         return {
             "id": self.id,
@@ -18,7 +18,7 @@ class Todos(db.Model):
             "description": self.description,
             "completed": self.completed,
             "created_at": self.created_at.isoformat() if self.created_at else None,
-            "Hello":self.Hello
+            "time":self.time
         }
     
 
