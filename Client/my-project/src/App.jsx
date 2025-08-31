@@ -98,7 +98,7 @@ function App() {
       const res = await axios.post(
         "https://gokuln8n.up.railway.app/webhook/8f12af30-0c0d-44d2-a4ab-b86bbbe72b40",
         {
-          todos:todos
+          todos
         }
       );
       alert("All Todo Sended")
