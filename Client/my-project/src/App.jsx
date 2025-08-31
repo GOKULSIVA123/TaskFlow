@@ -93,15 +93,15 @@ function App() {
     }
   };
   // ... (Your existing code) ...
-  const n8n = async (input, desc) => {
+  const n8n = async (todos) => {
     try {
       const res = await axios.post(
         "https://gokuln8n.up.railway.app/webhook-test/8f12af30-0c0d-44d2-a4ab-b86bbbe72b40",
         {
-          title: input,
-          description: desc.trim() || null,
+          todos:todos
         }
       );
+      alert("All Todo Sended")
     } catch (e) {
       console.log(e);
     }
@@ -157,7 +157,7 @@ function App() {
                 Add
               </button>
               <button
-                onClick={() => n8n(todos.title, todos.desc)}
+                onClick={() => n8n(todos)}
                 type="submit"
                 className="mt-3 bg-blue-400 px-6 py-2 rounded-lg text-white"
               >
