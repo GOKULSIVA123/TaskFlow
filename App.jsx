@@ -93,17 +93,19 @@ function App() {
     }
   };
   // ... (Your existing code) ...
-  const n8n= async (input,desc) => {
-    try{
-      const res= await axios.post("https://gokuln8n.up.railway.app/webhook-test/8f12af30-0c0d-44d2-a4ab-b86bbbe72b40",{
-        title:input,
-        description:desc.trim() || null
-      })
+  const n8n = async (input, desc) => {
+    try {
+      const res = await axios.post(
+        "https://gokuln8n.up.railway.app/webhook-test/8f12af30-0c0d-44d2-a4ab-b86bbbe72b40",
+        {
+          title: input,
+          description: desc.trim() || null,
+        }
+      );
+    } catch (e) {
+      console.log(e);
     }
-    catch(e){
-      console.log(e)
-    }
-  }
+  };
   return (
     <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-center">
       <div className="max-w-3xl bg-white p-6 rounded-xl w-full min-h-[500px] shadow-lg sm:p-8 text-center">
@@ -154,7 +156,8 @@ function App() {
               >
                 Add
               </button>
-              <button onClick={()=>n8n(todos.title,todos.desc)}
+              <button
+                onClick={() => n8n(todos.title, todos.desc)}
                 type="submit"
                 className="mt-3 bg-blue-400 px-6 py-2 rounded-lg text-white"
               >
