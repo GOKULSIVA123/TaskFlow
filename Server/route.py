@@ -7,7 +7,7 @@ from model import db, Todos
 def register_routes(app, db):
     @app.route("/todos",methods=['POST'])
     def add_todos():
-        N8N_WEBHOOK_URL="https://gokuln8n2.onrender.com/webhook/342df508-bfac-4f12-842b-72bb0d14ed56"
+        N8N_WEBHOOK_URL="https://gokuln8n2.onrender.com//webhook/342df508-bfac-4f12-842b-72bb0d14ed56"
         data=request.get_json()
         if not data or 'title' not in data:
             return jsonify({"error":"Data without title"}),404
