@@ -1,0 +1,126 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "gokulsiva1101@gmail.com",
+        "subject": "Gokul- Your Today Tasks",
+        "message": "={{ $json.emailBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1456,
+        0
+      ],
+      "id": "7a774ebb-13fe-471b-b201-995e83c9dc0c",
+      "name": "Send a message",
+      "webhookId": "1ddc21e1-08fa-43f1-a5b0-59c46bd38096",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "K2EN5MXsBJLexXeF",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const todos = items[0].json.body.todos;\n\nconst completedRows = todos\n  .filter(todo => todo.completed)\n  .map(todo => \n    `<tr>\n      <td>${todo.title}</td>\n      <td>${todo.description}</td>\n      <td>${todo.time || 'No time set'}</td>\n    </tr>`\n  ).join('\\n');\n\nconst notCompletedRows = todos\n  .filter(todo => !todo.completed)\n  .map(todo =>\n    `<tr>\n      <td>${todo.title}</td>\n      <td>${todo.description}</td>\n      <td>${todo.time || 'No time set'}</td>\n    </tr>`\n  ).join('\\n');\n\n// Completed tasks table (green)\nlet completedTable = `\n<h3 style=\"color:green; font-family:sans-serif;\">Completed Tasks</h3>\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"font-family:sans-serif; border-collapse:collapse; width:100%;\">\n  <tr style=\"background-color:#eafbe7;\">\n    <th>Title</th>\n    <th>Description</th>\n    <th>Time</th>\n  </tr>\n  ${completedRows || '<tr><td colspan=\"3\">No tasks completed today.</td></tr>'}\n</table>\n`;\n\n// Not completed tasks table (red)\nlet notCompletedTable = `\n<h3 style=\"color:red; font-family:sans-serif;\">Not Completed Tasks</h3>\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"font-family:sans-serif; border-collapse:collapse; width:100%;\">\n  <tr style=\"background-color:#faeaea;\">\n    <th>Title</th>\n    <th>Description</th>\n    <th>Time</th>\n  </tr>\n  ${notCompletedRows || '<tr><td colspan=\"3\">All tasks completed today!</td></tr>'}\n</table>\n`;\n\nlet html = `\n<h2 style=\"font-family:sans-serif; color:#2d6cdf; margin-bottom:10px;\">Gokul, here’s your daily task summary</h2>\n${completedTable}\n${notCompletedTable}\n<p style=\"font-size:19px; color:#34495e; font-family:sans-serif; margin-top:20px;\">\n  Congrats, goodnight!\n</p>\n`;\n\nreturn [{ json: { emailBody: html } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        816,
+        -176
+      ],
+      "id": "63f73b7d-d07e-45c8-bd25-652b3f61ba0d",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "8f12af30-0c0d-44d2-a4ab-b86bbbe72b40",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -32,
+        -224
+      ],
+      "id": "329a06cf-afb7-4655-8c2a-18e1c013d1f9",
+      "name": "Webhook",
+      "webhookId": "8f12af30-0c0d-44d2-a4ab-b86bbbe72b40"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 23,
+              "triggerAtMinute": 22
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        256,
+        -48
+      ],
+      "id": "07ff401c-59ba-4671-9185-6727350bd46a",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "70ac7ba9-2083-4df7-8537-51bd542be115",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "15336d8182a392fbafafe2a3aa033731687cfd9cc05859ad3c1d0827389aa75f"
+  },
+  "id": "kgTRVlOLGSeZECdN",
+  "tags": []
+}

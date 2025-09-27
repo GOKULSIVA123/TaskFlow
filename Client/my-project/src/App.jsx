@@ -3,6 +3,8 @@ import { FaPencilAlt } from "react-icons/fa";
 import axios from "axios";
 import party from "party-js";
 import { FaTrash } from "react-icons/fa";
+import '@n8n/chat/style.css';
+import { createChat } from '@n8n/chat';
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
@@ -27,7 +29,10 @@ function App() {
     }
   };
   useEffect(() => {
-    fetchdata();
+    fetchdata(),
+    createChat({
+      webhookUrl: 'https://gokuln8n.up.railway.app/webhook/5b64d6fb-4b7f-4076-921c-15977fd79952/chat'
+    });
   }, []);
   const addtodo = async (e) => {
     e.preventDefault();
