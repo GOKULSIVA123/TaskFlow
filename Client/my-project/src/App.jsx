@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     fetchdata(),
     createChat({
-      webhookUrl: 'https://gokuln8n.up.railway.app/webhook/5b64d6fb-4b7f-4076-921c-15977fd79952/chat'
+      webhookUrl: ''
     });
   }, []);
   const addtodo = async (e) => {
@@ -101,7 +101,7 @@ function App() {
   const n8n = async (todos) => {
     try {
       const res = await axios.post(
-        "https://gokuln8n.up.railway.app/webhook/8f12af30-0c0d-44d2-a4ab-b86bbbe72b40",
+        "https://gokuln8n2.onrender.com//webhook/342df508-bfac-4f12-842b-72bb0d14ed56",
         {
           todos
         }
