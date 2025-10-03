@@ -3,8 +3,9 @@ import { FaPencilAlt } from "react-icons/fa";
 import axios from "axios";
 import party from "party-js";
 import { FaTrash } from "react-icons/fa";
-import '@n8n/chat/style.css';
-import { createChat } from '@n8n/chat';
+import "@n8n/chat/style.css";
+import { motion } from "framer-motion";
+import { createChat } from "@n8n/chat";
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
@@ -30,9 +31,9 @@ function App() {
   };
   useEffect(() => {
     fetchdata(),
-    createChat({
-      webhookUrl: ''
-    });
+      createChat({
+        webhookUrl: "",
+      });
   }, []);
   const addtodo = async (e) => {
     e.preventDefault();
@@ -103,21 +104,32 @@ function App() {
       const res = await axios.post(
         "https://n8n-service-urm0.onrender.com/webhook/342df508-bfac-4f12-842b-72bb0d14ed56",
         {
-          todos
+          todos,
         }
       );
-      alert("All Todo Sended")
+      alert("All Todo Sended");
     } catch (e) {
       console.log(e);
     }
   };
   return (
     <div className="bg-gray-200 min-h-screen flex flex-col justify-center items-center">
-      <div className="max-w-3xl bg-white p-6 rounded-xl w-full min-h-[500px] shadow-lg sm:p-8 text-center">
-        <h1 className="text-2xl font-[600]">TodoList</h1>
-        <h2 className="text-2xl font-[600] mt-2 text-blue-400">
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="max-w-3xl bg-white p-6 rounded-xl w-full min-h-[500px] shadow-lg sm:p-8 text-center"
+      >
+        <h1 className="text-2xl font-[600] inline-block group relative cursor-pointer">
+          TodoList
+          <span className="absolute left-0 bottom-0.5 w-0 h-0.5 transition-all duration-300 bg-black group-hover:w-full"></span>
+        </h1>
+        <br></br>
+        <h2 className="text-2xl font-[600] mt-2 text-blue-400 group relative inline-block cursor-pointer">
           Weekly Todo List
+          <span className="absolute left-0 bottom-0.5 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
         </h2>
+
         {/* THIS IS THE UPDATED LINE FOR RESPONSIVENESS */}
         <div className="mt-5 flex flex-col sm:flex-row items-center sm:items-start justify-around gap-8 sm:gap-4">
           <form
@@ -155,22 +167,26 @@ function App() {
               className="p-3 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"
             ></input>
             <div className="flex flex-row gap-3">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2, ease: "easeIn" }}
                 type="submit"
                 className="mt-3 bg-blue-400 px-6 py-2 rounded-lg text-white"
               >
                 Add
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2, ease: "easeIn" }}
                 onClick={() => n8n(todos)}
                 type="submit"
                 className="mt-3 bg-blue-400 px-6 py-2 rounded-lg text-white"
               >
                 Send in Gmail
-              </button>
+              </motion.button>
             </div>
           </form>
-          <div className="bg-blue-400 max-w-[300px] w-full min-h-[300px] p-6 rounded-lg">
+          <div className="bg-blue-400 max-w-[300px] w-full min-h-[300px] p-6 rounded-lg shadow-lg shadow-blue-500/40">
             <h1 className="text-2xl font-[400] text-white">Todo Lists</h1>
             <ul className="flex flex-col gap-1">
               {todos.map((todo, index) => (
@@ -234,7 +250,7 @@ function App() {
             </ul>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
